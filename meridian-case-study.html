@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian — Case Study | Inesa Malyk</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bk:#080706;--gr:#1A1917;--gr2:#242220;
+  --br:#2B1F18;--br2:#3D2B20;
+  --iv:#F2EDE5;--iv2:#C0B8AE;--iv3:#7A7269;
+  --ln:#3A2820;--frame:#28221A;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bk);color:var(--iv);font-family:'Outfit',sans-serif;font-weight:300;font-size:15px;line-height:1.65;overflow-x:hidden}
+.s{font-family:'Cormorant Garamond',serif}
+img{max-width:100%;display:block}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:22px 56px;background:linear-gradient(to bottom,rgba(8,7,6,.96),transparent)}
+.nl-wrap{display:flex;flex-direction:column;gap:3px;text-decoration:none}
+.nl{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;letter-spacing:.1em;color:var(--iv);text-transform:uppercase;line-height:1}
+.nl-sub{font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--iv3);font-family:'Outfit',sans-serif;font-weight:300;line-height:1}
+nav ul{display:flex;gap:36px;list-style:none}
+nav a{color:var(--iv3);text-decoration:none;font-size:11px;letter-spacing:.18em;text-transform:uppercase;transition:color .25s}
+nav a:hover{color:var(--iv)}
+
+.crumb{padding:120px 56px 0;display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--iv3)}
+.crumb a{color:var(--iv3);text-decoration:none;transition:color .25s}
+.crumb a:hover{color:var(--iv)}
+.crumb span.sep{opacity:.4}
+.crumb span.cur{color:var(--iv)}
+
+hr.d{border:none;border-top:1px solid var(--ln);margin:0 56px}
+
+.sec{padding:48px 56px}
+.lbl{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--iv3);margin-bottom:32px;display:flex;align-items:center;gap:16px}
+.lbl::after{content:'';display:block;width:36px;height:1px;background:var(--ln)}
+
+.cs-hero{padding:40px 56px 0}
+.cs-tag{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--iv3);margin-bottom:18px}
+.cs-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7vw,96px);font-weight:300;line-height:.98;color:var(--iv)}
+.cs-title em{font-style:italic;color:var(--iv2)}
+.cs-tagline{margin-top:20px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:var(--iv2);letter-spacing:.02em}
+.cs-sub{margin-top:22px;max-width:640px;color:var(--iv2);font-size:14px;line-height:1.75}
+
+.meta-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--ln);margin-top:44px}
+.meta-cell{background:var(--bk);padding:26px 32px}
+.meta-k{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--iv3);margin-bottom:8px}
+.meta-v{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--iv);font-weight:400}
+
+.concept{padding:64px 56px;background:var(--gr)}
+.concept-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:start}
+.concept-h{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,44px);font-weight:300;line-height:1.1;color:var(--iv)}
+.concept-h em{font-style:italic;color:var(--iv2)}
+.cq{color:var(--iv2);line-height:1.85;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:20px}
+.cq+.cq{margin-top:22px}
+.cq::before{content:'"';color:var(--iv3)}
+.cq::after{content:'"';color:var(--iv3)}
+
+.palette-note{margin-top:8px;display:flex;align-items:center;gap:14px}
+.pal-chip{width:34px;height:34px;border-radius:6px;border:1px solid rgba(255,255,255,.1);flex-shrink:0}
+
+.site-frame-wrap{padding:8px 56px 64px}
+.browser-chrome{background:var(--gr2);border-radius:10px 10px 0 0;padding:14px 18px;display:flex;align-items:center;gap:18px;border:1px solid var(--ln);border-bottom:none}
+.chrome-dots{display:flex;gap:7px}
+.chrome-dots span{width:11px;height:11px;border-radius:50%;background:#4a413a}
+.chrome-bar{flex:1;background:var(--bk);border-radius:6px;padding:7px 16px;font-size:11px;color:var(--iv3);letter-spacing:.02em;font-family:'Outfit',sans-serif}
+.chrome-open{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--iv2);text-decoration:none;white-space:nowrap;border:1px solid var(--ln);padding:8px 14px;border-radius:6px;transition:all .2s}
+.chrome-open:hover{background:var(--iv);color:var(--bk)}
+.site-embed{width:100%;height:820px;border:1px solid var(--ln);border-top:none;border-radius:0 0 10px 10px;background:#0b0a14;display:block}
+.scroll-hint{margin-top:14px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--iv3);text-align:center}
+
+.next-proj{padding:56px;border-top:1px solid var(--ln);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.next-proj a{text-decoration:none}
+.np-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--iv3);margin-bottom:6px}
+.np-title{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--iv);transition:color .25s}
+.next-proj a:hover .np-title{color:var(--iv2)}
+
+footer{padding:24px 56px;border-top:1px solid var(--ln);display:flex;justify-content:space-between;align-items:center;background:var(--bk);gap:20px}
+footer span{font-size:11px;color:var(--iv3);letter-spacing:.1em}
+footer .fn{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--iv3)}
+.social-links{display:flex;align-items:center;gap:20px}
+.social-link{display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--iv3);font-size:10px;letter-spacing:.18em;text-transform:uppercase;transition:color .25s}
+.social-link:hover{color:var(--iv)}
+.social-link svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.4;flex-shrink:0}
+
+.rev{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rev.on{opacity:1;transform:translateY(0)}
+
+@media(max-width:860px){
+  .concept-grid,.meta-row{grid-template-columns:1fr}
+  nav ul{display:none}
+  .crumb{padding-top:110px}
+  .site-embed{height:520px}
+  .site-frame-wrap{padding:8px 20px 48px}
+  .sec,.concept,.next-proj{padding-left:20px;padding-right:20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nl-wrap" href="portfolio.html">
+    <span class="nl">Inesa Malyk</span>
+    <span class="nl-sub">UI/UX & Web Designer</span>
+  </a>
+  <ul>
+    <li><a href="portfolio.html#work">Work</a></li>
+    <li><a href="portfolio.html#services">Services</a></li>
+    <li><a href="portfolio.html#approach">Approach</a></li>
+    <li><a href="portfolio.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="crumb">
+  <a href="portfolio.html#work">Work</a>
+  <span class="sep">/</span>
+  <a href="portfolio-personal-brand.html">Portfolio &amp; Personal Brand</a>
+  <span class="sep">/</span>
+  <span class="cur">Meridian</span>
+</div>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="rev">
+    <div class="cs-tag">Concept · Full Website Design</div>
+    <h1 class="cs-title">Meridian.</h1>
+    <p class="cs-tagline">Agencies decorate. We engineer.</p>
+    <p class="cs-sub">A Web3 growth-partner site built to feel like a serious engineering studio, not a crypto marketing shop — dark, precise, and confident, with numbers doing the convincing instead of hype.</p>
+  </div>
+  <div class="meta-row rev">
+    <div class="meta-cell">
+      <div class="meta-k">Project Type</div>
+      <div class="meta-v">Personal / Concept</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-k">Industry</div>
+      <div class="meta-v">Web3 &amp; Crypto Agency</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-k">Scope</div>
+      <div class="meta-v">Full Website · Brand System</div>
+    </div>
+  </div>
+</section>
+
+<hr class="d">
+
+<!-- CONCEPT & INTENT -->
+<section class="concept">
+  <div class="lbl">Concept &amp; Intent</div>
+  <div class="concept-grid">
+    <h2 class="concept-h rev">The thinking<br>behind the <em>brand.</em></h2>
+    <div class="rev">
+      <p class="cq">I wanted Meridian to feel like a serious engineering studio rather than a typical crypto marketing agency — so the color palette leans into a deep navy and near-black base with a single electric violet accent, evoking the seriousness of fintech and blockchain infrastructure rather than the loud, neon clichés a lot of Web3 branding falls into. The violet carries meaning too: it's used sparingly, only on the most important actions and numbers, so it reads as precision rather than decoration.</p>
+      <p class="cq">With this project, I wanted to show I can design for a technical, high-stakes B2B audience — communicating credibility through restraint, hard numbers, and a direct "agencies decorate, we engineer" positioning, rather than through flashy visuals.</p>
+      <div class="palette-note">
+        <div class="pal-chip" style="background:#0B0A14"></div>
+        <div class="pal-chip" style="background:#141225"></div>
+        <div class="pal-chip" style="background:#7C5CFF"></div>
+        <div class="pal-chip" style="background:#F2EDE5"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE SITE -->
+<section class="sec" style="padding-bottom:0">
+  <div class="lbl">The Full Website</div>
+</section>
+<div class="site-frame-wrap rev">
+  <div class="browser-chrome">
+    <div class="chrome-dots"><span></span><span></span><span></span></div>
+    <div class="chrome-bar">meridian.xyz</div>
+    <a class="chrome-open" href="meridian-site.html" target="_blank" rel="noopener">Open Full Site ↗</a>
+  </div>
+  <iframe class="site-embed" src="meridian-site.html" title="Meridian full website" loading="lazy"></iframe>
+  <div class="scroll-hint">Scroll inside the frame to explore the full live site</div>
+</div>
+
+<!-- NEXT PROJECT -->
+<div class="next-proj">
+  <a href="ava-sinclair-case-study.html">
+    <div class="np-lbl">Previous Project</div>
+    <div class="np-title s">← Ava Sinclair</div>
+  </a>
+  <a href="varga-case-study.html" style="text-align:right">
+    <div class="np-lbl">Next Project</div>
+    <div class="np-title s">Varga &amp; Associates →</div>
+  </a>
+</div>
+
+<footer>
+  <span class="fn">Inesa Malyk</span>
+  <div class="social-links">
+    <a href="https://www.behance.net/inessamalyk1" target="_blank" rel="noopener" class="social-link" aria-label="Behance">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" width="14" height="14"><path d="M7.799 5.698c.589 0 1.12.051 1.606.156.482.102.894.273 1.241.507.344.235.612.546.804.938.188.387.281.871.281 1.443 0 .619-.141 1.137-.421 1.551-.28.41-.696.754-1.254 1.028.757.216 1.317.601 1.679 1.146.362.546.546 1.205.546 1.975 0 .623-.119 1.161-.357 1.612a3.1 3.1 0 0 1-.97 1.115 4.347 4.347 0 0 1-1.437.647 6.498 6.498 0 0 1-1.693.215H2V5.698h5.799zm-.351 4.95c.483 0 .882-.114 1.19-.342.306-.228.461-.591.461-1.087 0-.27-.05-.494-.147-.669a1.149 1.149 0 0 0-.4-.421 1.729 1.729 0 0 0-.585-.222 3.332 3.332 0 0 0-.695-.067H4.709v2.808h2.739zm.157 5.206c.258 0 .505-.026.741-.08.237-.054.448-.143.628-.27.181-.126.326-.296.434-.508.107-.212.162-.482.162-.806 0-.642-.178-1.1-.535-1.373-.354-.271-.825-.408-1.412-.408H4.709v3.445h2.896zM16.344 16.84c.43.42.999.628 1.706.628.531 0 .989-.133 1.371-.399.381-.266.617-.549.708-.846h2.168c-.347 1.074-.878 1.843-1.595 2.303-.717.46-1.584.689-2.6.689a5.4 5.4 0 0 1-1.98-.353 4.215 4.215 0 0 1-1.521-1.011 4.544 4.544 0 0 1-.973-1.589 5.867 5.867 0 0 1-.341-2.03c0-.713.116-1.376.349-1.986.233-.611.566-1.138.997-1.58a4.53 4.53 0 0 1 1.527-1.04 4.94 4.94 0 0 1 1.942-.375c.793 0 1.493.153 2.097.457.603.303 1.1.714 1.491 1.231.39.517.673 1.113.845 1.785.173.673.234 1.384.185 2.131h-6.468c0 .784.214 1.365.642 1.785zm2.98-4.812c-.347-.381-.861-.572-1.544-.572-.448 0-.822.076-1.117.228-.293.153-.53.344-.706.57a2.083 2.083 0 0 0-.37.742 3.55 3.55 0 0 0-.115.713h4.126c-.09-.715-.327-1.3-.674-1.681zM14.396 7.02h4.977V8.35h-4.977V7.02z"/></svg>
+      Behance
+    </a>
+    <a href="https://x.com/inesaamalyk?s=11" target="_blank" rel="noopener" class="social-link" aria-label="X / Twitter">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" width="12" height="12"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+      Twitter
+    </a>
+    <a href="https://www.instagram.com/inesaamalyk?igsi=MWZqZnprd3dxYjgy&amp;utm_source=qr" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="12" height="12"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
+    <a href="https://www.linkedin.com/in/inesa-malyk-303ba6430?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_ios" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" width="13" height="13"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.34 18.34H5.67V9.75h2.67v8.59zM7 8.6a1.55 1.55 0 1 1 0-3.1 1.55 1.55 0 0 1 0 3.1zm11.34 9.74h-2.67v-4.18c0-1-.02-2.28-1.39-2.28-1.4 0-1.61 1.09-1.61 2.21v4.25H10V9.75h2.56v1.17h.04c.36-.68 1.23-1.39 2.53-1.39 2.71 0 3.21 1.78 3.21 4.10v4.71z"/></svg>
+      LinkedIn
+    </a>
+  </div>
+  <span>Strategic Brand &amp; Visual Designer</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on') });
+}, { threshold: .12 });
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

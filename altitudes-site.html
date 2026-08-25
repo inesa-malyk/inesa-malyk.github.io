@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Altitudes — Architecture for High Places</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bk:#080706;--gr:#1A1917;--gr2:#242220;
+  --br:#2B1F18;--br2:#3D2B20;
+  --iv:#F2EDE5;--iv2:#C0B8AE;--iv3:#7A7269;
+  --ln:#3A2820;--frame:#28221A;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bk);color:var(--iv);font-family:'Outfit',sans-serif;font-weight:300;font-size:15px;line-height:1.7;overflow-x:hidden}
+.s{font-family:'Cormorant Garamond',serif}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:26px 56px;background:linear-gradient(to bottom,rgba(8,7,6,.94),transparent)}
+.brand{font-family:'Cormorant Garamond',serif;font-size:17px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--iv)}
+nav ul{display:flex;gap:38px;list-style:none}
+nav a.nl{color:var(--iv3);text-decoration:none;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;transition:color .25s}
+nav a.nl:hover{color:var(--iv)}
+.nq{border:1px solid var(--ln);padding:9px 18px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--iv2);transition:all .25s}
+.nq:hover{border-color:var(--iv2);color:var(--iv)}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:flex-end}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.6) saturate(.9)}
+.hero-fade{position:absolute;inset:0;background:linear-gradient(to top,var(--bk) 0%,rgba(8,7,6,.15) 46%,rgba(8,7,6,.35) 100%)}
+.hero-inner{position:relative;padding:0 56px 80px;width:100%}
+.h-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--iv3);margin-bottom:22px;display:flex;align-items:center;gap:14px}
+.h-eyebrow::before{content:'';width:36px;height:1px;background:var(--ln)}
+.h-title{font-family:'Cormorant Garamond',serif;font-size:clamp(46px,7.4vw,104px);font-weight:300;line-height:.98;max-width:900px}
+.h-title em{font-style:italic;color:var(--iv2)}
+.h-sub{margin-top:26px;max-width:480px;color:var(--iv2);font-size:14px;line-height:1.8}
+.h-cta{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 26px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:all .25s}
+.btn-p{background:var(--iv);color:var(--bk)}
+.btn-p:hover{background:var(--iv2)}
+.btn-s{border:1px solid var(--ln);color:var(--iv2)}
+.btn-s:hover{border-color:var(--iv2);color:var(--iv)}
+
+/* STAT ROW */
+.stat-row{border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);display:grid;grid-template-columns:1fr 1fr 1.6fr;background:var(--gr)}
+.stat-cell{padding:26px 40px;border-right:1px solid var(--ln)}
+.stat-cell:last-child{border-right:none;overflow:hidden;display:flex;align-items:center}
+.stat-k{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--iv3);margin-bottom:8px}
+.stat-v{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--iv)}
+.marquee-track{display:flex;gap:22px;white-space:nowrap;animation:mq 32s linear infinite;font-size:11px;letter-spacing:.1em;color:var(--iv3)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.sec{padding:110px 56px}
+.lbl{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--iv3);margin-bottom:40px;display:flex;align-items:center;gap:16px}
+.lbl::after{content:'';flex:0 0 auto;width:36px;height:1px;background:var(--ln)}
+.sec-h{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4.4vw,54px);font-weight:300;line-height:1.06;max-width:760px}
+.sec-h em{font-style:italic;color:var(--iv2)}
+
+/* PRINCIPLES TRIPTYCH */
+.trip{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--ln)}
+.trip-item{background:var(--bk);position:relative;overflow:hidden}
+.trip-item img{height:420px;object-fit:cover;filter:saturate(.85) brightness(.82);transition:transform 1.1s ease}
+.trip-item:hover img{transform:scale(1.06)}
+.trip-cap{padding:22px 24px}
+.trip-num{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--iv2);margin-bottom:6px}
+.trip-t{font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:8px}
+.trip-p{color:var(--iv2);font-size:13px;line-height:1.65}
+
+/* ATELIER NOTE */
+.note{padding:100px 56px;background:var(--gr);text-align:center}
+.note-q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(22px,3vw,34px);font-weight:300;color:var(--iv);max-width:820px;margin:0 auto;line-height:1.4}
+.note-q em{color:var(--iv2);font-style:italic}
+.note-by{margin-top:28px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--iv3)}
+
+/* METHOD */
+.method-grid{margin-top:60px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ln)}
+.mv{padding:36px 30px;border-right:1px solid var(--ln)}
+.mv:last-child{border-right:none}
+.mv-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--iv2);margin-bottom:26px}
+.mv-t{font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:12px}
+.mv-p{color:var(--iv2);font-size:13px;line-height:1.7}
+.method-photo{margin-top:2px;position:relative}
+.method-photo img{width:100%;height:380px;object-fit:cover;filter:brightness(.75)}
+.mp-cap{position:absolute;bottom:22px;left:0;font-size:12px;letter-spacing:.04em;color:var(--iv2);background:rgba(8,7,6,.55);padding:8px 16px}
+
+/* RESIDENCES */
+.res-list{margin-top:56px;border-top:1px solid var(--ln)}
+.res-row{display:grid;grid-template-columns:60px 1fr 140px 100px 70px;align-items:center;padding:26px 0;border-bottom:1px solid var(--ln);transition:background .25s;cursor:default}
+.res-row:hover{background:var(--gr)}
+.res-row:hover .res-name{color:var(--iv2)}
+.res-idx{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--iv3)}
+.res-name{font-family:'Cormorant Garamond',serif;font-size:22px;transition:color .25s}
+.res-loc{color:var(--iv2);font-size:12.5px}
+.res-el{font-size:11px;color:var(--iv3)}
+.res-yr{font-size:11px;color:var(--iv3);text-align:right}
+
+/* CORRESPONDENCE */
+.corr{background:var(--gr);padding:100px 56px}
+.corr-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:start}
+.corr-h{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,48px);font-weight:300;line-height:1.1;margin-bottom:22px}
+.corr-h em{font-style:italic;color:var(--iv2)}
+.corr-p{color:var(--iv2);max-width:480px;font-size:14px;line-height:1.8;margin-bottom:36px}
+.offices{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-bottom:36px}
+.office-k{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--iv3);margin-bottom:10px}
+.office-v{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--iv);margin-bottom:4px}
+.office-p{font-size:12px;color:var(--iv2)}
+.write-link{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--iv);font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;border-bottom:1px solid var(--ln);padding-bottom:8px;transition:border-color .25s}
+.write-link:hover{border-color:var(--iv2);color:var(--iv2)}
+
+/* FOOTER */
+footer{padding:26px 56px;border-top:1px solid var(--ln);display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:.1em;color:var(--iv3)}
+
+.rev{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.rev.on{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  nav ul{display:none}
+  .stat-row{grid-template-columns:1fr}
+  .stat-cell{border-right:none;border-bottom:1px solid var(--ln)}
+  .trip{grid-template-columns:1fr}
+  .method-grid{grid-template-columns:1fr 1fr}
+  .mv{border-bottom:1px solid var(--ln);padding-right:16px}
+  .corr-grid{grid-template-columns:1fr}
+  .offices{grid-template-columns:1fr}
+  .res-row{grid-template-columns:40px 1fr 80px}
+  .res-el,.res-yr{display:none}
+  .sec{padding:70px 24px}
+  nav,.hero-inner,.corr,footer{padding-left:24px;padding-right:24px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#top">Altitudes</a>
+  <ul>
+    <li><a class="nl" href="#atelier">Atelier</a></li>
+    <li><a class="nl" href="#residences">Residences</a></li>
+    <li><a class="nl" href="#method">Method</a></li>
+  </ul>
+  <a class="nq" href="#contact">Enquire</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <img class="hero-img" src="https://altitudesproject.lovable.app/assets/alp-hero-CmX03zO_.jpg" alt="Alpine residence facing the Matterhorn">
+  <div class="hero-fade"></div>
+  <div class="hero-inner">
+    <div class="h-eyebrow rev">01 · Atmosphere</div>
+    <h1 class="h-title s rev">Rooms tuned<br>to <em>altitude.</em></h1>
+    <p class="h-sub rev">An atelier designing private residences for the high places of Switzerland and France. Quiet houses, oriented to the weather.</p>
+    <div class="h-cta rev">
+      <a class="btn btn-p" href="#residences">View Residences</a>
+      <a class="btn btn-s" href="#atelier">The Atelier</a>
+    </div>
+  </div>
+</header>
+
+<!-- STAT ROW -->
+<div class="stat-row">
+  <div class="stat-cell">
+    <div class="stat-k">Elevation</div>
+    <div class="stat-v s">1,620 — 2,400 m</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-k">Commissions</div>
+    <div class="stat-v s">Twelve since 2014</div>
+  </div>
+  <div class="stat-cell">
+    <div class="marquee-track">
+      <span>ZERMATT ✦ VERBIER ✦ CHAMONIX ✦ MEGÈVE ✦ ST. MORITZ ✦ COURCHEVEL ✦ GSTAAD ✦ VAL D'ISÈRE ✦</span>
+      <span>ZERMATT ✦ VERBIER ✦ CHAMONIX ✦ MEGÈVE ✦ ST. MORITZ ✦ COURCHEVEL ✦ GSTAAD ✦ VAL D'ISÈRE ✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- PRINCIPLES -->
+<section class="sec" id="atelier">
+  <div class="lbl">02 · Principles</div>
+  <h2 class="sec-h s rev">Detail holds <em>weather.</em></h2>
+  <div class="trip">
+    <div class="trip-item rev">
+      <img src="https://altitudesproject.lovable.app/assets/alp-detail-BGHdbcho.jpg" alt="Material detail">
+      <div class="trip-cap">
+        <div class="trip-num s">01</div>
+        <div class="trip-t s">Detail</div>
+        <p class="trip-p">Cuts that hold weather. Larch, lime plaster, sawn stone.</p>
+      </div>
+    </div>
+    <div class="trip-item rev">
+      <img src="https://altitudesproject.lovable.app/assets/alp-bedroom-DStro8js.jpg" alt="Bedroom overlooking the mountains">
+      <div class="trip-cap">
+        <div class="trip-num s">02</div>
+        <div class="trip-t s">Holds</div>
+        <p class="trip-p">A bed, a window, a horizon. Nothing else asks for attention.</p>
+      </div>
+    </div>
+    <div class="trip-item rev">
+      <img src="https://altitudesproject.lovable.app/assets/alp-fire-Dnqu_d8H.jpg" alt="Fireplace in an alpine residence">
+      <div class="trip-cap">
+        <div class="trip-num s">03</div>
+        <div class="trip-t s">Weather</div>
+        <p class="trip-p">Rooms that turn toward the storm without flinching.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ATELIER NOTE -->
+<div class="note rev">
+  <p class="note-q s">We build houses that <em>remember</em> the mountain they sit on — and forget the world below it.</p>
+  <div class="note-by">Studio Altitudes · Geneva · Annecy</div>
+</div>
+
+<!-- METHOD -->
+<section class="sec" id="method">
+  <div class="lbl">03 · Method</div>
+  <h2 class="sec-h s rev">Four <em>movements.</em></h2>
+  <div class="method-grid rev">
+    <div class="mv">
+      <div class="mv-num">I</div>
+      <div class="mv-t s">Site</div>
+      <p class="mv-p">A week on the ridge. We measure the wind, the snow line, and where the sun lands at four.</p>
+    </div>
+    <div class="mv">
+      <div class="mv-num">II</div>
+      <div class="mv-t s">Section</div>
+      <p class="mv-p">We draw in section before plan. Every house begins as a relationship with gravity.</p>
+    </div>
+    <div class="mv">
+      <div class="mv-num">III</div>
+      <div class="mv-t s">Materials</div>
+      <p class="mv-p">Larch, lime, slate, brass. Sourced within two valleys whenever the geology allows.</p>
+    </div>
+    <div class="mv">
+      <div class="mv-num">IV</div>
+      <div class="mv-t s">Hand-off</div>
+      <p class="mv-p">Eighteen months from siting to keys. We furnish the first season.</p>
+    </div>
+  </div>
+  <div class="method-photo rev">
+    <img src="https://altitudesproject.lovable.app/assets/alp-chalet-DvQf0TMJ.jpg" alt="Chalet d'Ombre at dusk">
+    <div class="mp-cap s">Chalet d'Ombre · Zermatt · 1,932 m</div>
+  </div>
+</section>
+
+<!-- RESIDENCES -->
+<section class="sec" id="residences">
+  <div class="lbl">04 · Residences</div>
+  <h2 class="sec-h s rev">A small <em>catalogue.</em></h2>
+  <div class="res-list rev">
+    <div class="res-row">
+      <div class="res-idx">01</div>
+      <div class="res-name s">Chalet d'Ombre</div>
+      <div class="res-loc">Zermatt, CH</div>
+      <div class="res-el">1,932 m</div>
+      <div class="res-yr">2024</div>
+    </div>
+    <div class="res-row">
+      <div class="res-idx">02</div>
+      <div class="res-name s">Maison Crête</div>
+      <div class="res-loc">Megève, FR</div>
+      <div class="res-el">1,420 m</div>
+      <div class="res-yr">2024</div>
+    </div>
+    <div class="res-row">
+      <div class="res-idx">03</div>
+      <div class="res-name s">Refuge Solène</div>
+      <div class="res-loc">Verbier, CH</div>
+      <div class="res-el">2,108 m</div>
+      <div class="res-yr">2023</div>
+    </div>
+    <div class="res-row">
+      <div class="res-idx">04</div>
+      <div class="res-name s">Villa Aiguille</div>
+      <div class="res-loc">Chamonix, FR</div>
+      <div class="res-el">1,640 m</div>
+      <div class="res-yr">2022</div>
+    </div>
+    <div class="res-row">
+      <div class="res-idx">05</div>
+      <div class="res-name s">Hameau Nord</div>
+      <div class="res-loc">Gstaad, CH</div>
+      <div class="res-el">1,820 m</div>
+      <div class="res-yr">2021</div>
+    </div>
+  </div>
+</section>
+
+<!-- CORRESPONDENCE -->
+<section class="corr" id="contact">
+  <div class="corr-grid">
+    <div class="rev">
+      <div class="lbl" style="margin-bottom:20px">— Correspondence —</div>
+      <h2 class="corr-h s">Begin a <em>commission.</em></h2>
+      <p class="corr-p">We accept two private commissions per year. Letters reviewed by the founding partners; first meetings held in Geneva or on site.</p>
+      <a class="write-link" href="mailto:atelier@altitudes.studio">Write to the atelier →</a>
+    </div>
+    <div class="offices rev">
+      <div>
+        <div class="office-k">Geneva</div>
+        <div class="office-v s">Rue des Bains 27</div>
+        <div class="office-p">+41 22 311 88 02</div>
+      </div>
+      <div>
+        <div class="office-k">Annecy</div>
+        <div class="office-v s">Quai Eustache Chappuis 4</div>
+        <div class="office-p">+33 4 50 51 09 14</div>
+      </div>
+      <div>
+        <div class="office-k">Letters</div>
+        <div class="office-v s">atelier@altitudes.studio</div>
+        <div class="office-p">Replied Monday — Friday</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© MMXXVI Altitudes Atelier · SIA / SIRA Registered · Geneva · Annecy</span>
+  <span>46°00′N · 7°45′E</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on') });
+}, { threshold: .12 });
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
